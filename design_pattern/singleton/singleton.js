@@ -38,9 +38,4 @@ const singleton = (() => {
 
 })();
 
-
-// ここでまとめてインスタンス化
-var singletonInstance = singleton.getInstance();
-
-console.log(singletonInstance.getRandomNumber());
-singletonInstance.publicMethod();
+module.exports = singleton.getInstance();

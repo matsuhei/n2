@@ -18,14 +18,10 @@ const modulePattern = {
       this.config = newConfig;
       console.log(this.config.language);
     }
+  },
+  getMyConfig: () => {
+    return this.config;
   }
 };
 
-modulePattern.log();
-
-// modulePattern.showMyConfig();
-modulePattern.updateMyConfig({
-  language: "jp",
-  useCaching: false
-});
-modulePattern.showMyConfig();
+module.exports = modulePattern;

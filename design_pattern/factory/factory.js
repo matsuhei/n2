@@ -34,6 +34,8 @@ TrainFactory.prototype.createTrain = (options) => {
   return new this.trainClass(options);
 };
 
+module.exports = new TrainFactory();
+
 // create train
 const trainFactory = new TrainFactory();
 const train = trainFactory.createTrain({
