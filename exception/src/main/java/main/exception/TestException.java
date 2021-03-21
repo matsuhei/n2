@@ -1,4 +1,4 @@
-package main.Exception;
+package main.exception;
 
 public class TestException extends Exception {
 
