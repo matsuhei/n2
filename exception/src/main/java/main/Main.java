@@ -146,6 +146,59 @@ public class Main {
     }
 
     /**
+     * 8-2 処理前に確認
+     * ログ更新前に書き換え可能か確認
+     *
+     * @return
+     */
+    public static Log genLog8_2(Log log) {
+        // 購入前確認
+        if (!log.getRewriteFlag()) {
+            return null;
+        }
+
+        // 変更処理
+        log.setName("test");
+        log.setDetail("test detail");
+
+        return log;
+    }
+
+    /**
+     * 8-3 回復コードで戻す
+     * 回復コードで戻す
+     *
+     * @return
+     */
+    public static Log genLog8_3(Log log) {
+        // 変更処理
+        log.setName("test");
+        log.setDetail("test detail");
+
+        // 回復コードがあるから戻せる (DBとか別のところから元の状態を取得とか)
+        return log;
+    }
+
+    /**
+     * 8-4 一時コピーを使用
+     * 破壊的更新を防ぐ
+     *
+     * @param log
+     * @return
+     */
+    public static Log genLog8_4(Log log) throws CloneNotSupportedException {
+        // クローン作成
+        Log logClone = log.clone();
+
+        // 変更処理
+        logClone.setName("test");
+        logClone.setDetail("test detail");
+
+        // クローンを返却
+        return logClone;
+    }
+
+    /**
      * 全体をキャッチ
      *
      * @return {String}
