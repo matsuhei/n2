@@ -6,3 +6,4 @@
 - design_pattern
 - lang_practice
 - exception
+- index
