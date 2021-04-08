@@ -9,3 +9,4 @@
 - index
 
 - [index](./index)
+- [index](https://github.com/matsuhei/n2/tree/main/mysql/index)
