@@ -7,3 +7,5 @@
 - lang_practice
 - exception
 - index
+
+- [index](./index)
