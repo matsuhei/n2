@@ -33,17 +33,28 @@ public class UserServiceTest {
             );
         }
 
+        userDao.selectAll();
+
+        // インデックスを貼ってない かつ 引き出すケースが無いものは基本使わない
+        Long timeByParamStart = new Timestamp(System.currentTimeMillis()).getTime();
+        User userByParam = userDao.selectByParamA("A100");
+        Long timeByParamEnd = new Timestamp(System.currentTimeMillis()).getTime();
+        Long resultParam = timeByParamEnd - timeByParamStart;
+        System.out.println("インデックスなしの単体取得(ms): " + resultParam.toString());
+
+        // primary unique
         Long timeByIdStart = new Timestamp(System.currentTimeMillis()).getTime();
         User user = userDao.selectById(100L);
         Long timeByIdEnd = new Timestamp(System.currentTimeMillis()).getTime();
         Long resultId = timeByIdEnd - timeByIdStart;
-        System.out.println("インデックスありの単体取得(ms): " + resultId.toString());
+        System.out.println("Primary Uniqueの単体取得(ms): " + resultId.toString());
 
-        Long timeByParamStart = new Timestamp(System.currentTimeMillis()).getTime();
-        User userParam = userDao.selectByParamA("A100");
-        Long timeByParamEnd = new Timestamp(System.currentTimeMillis()).getTime();
-        Long resultParam = timeByParamEnd - timeByParamStart;
-        System.out.println("インデックスなしの単体取得(ms): " + resultParam.toString());
+        // index
+        Long timeByNameStart = new Timestamp(System.currentTimeMillis()).getTime();
+        User userByName = userDao.selectByName("test100");
+        Long timeByNameEnd = new Timestamp(System.currentTimeMillis()).getTime();
+        Long resultByName = timeByNameEnd - timeByNameStart;
+        System.out.println("index の単体取得(ms): " + resultByName.toString());
 
         AssertionUtil.assertEquals(
             user,

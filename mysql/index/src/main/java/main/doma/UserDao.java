@@ -21,6 +21,9 @@ public interface UserDao {
     User selectById(Long id);
 
     @Select
+    User selectByName(String name);
+
+    @Select
     User selectByParamA(String paramA);
 
     @Select
