@@ -6,7 +6,4 @@
 - design_pattern
 - lang_practice
 - exception
-- index
-
-- [index](./index)
 - [index](https://github.com/matsuhei/n2/tree/main/mysql/index)
