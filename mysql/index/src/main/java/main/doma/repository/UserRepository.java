@@ -1,6 +1,7 @@
-package main.doma;
+package main.doma.repository;
 
 
+import main.doma.dao.UserDao;
 import main.doma.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,5 +19,9 @@ public class UserRepository {
 
     public User findById(Long id) {
         return userDao.selectById(id);
+    }
+
+    public List<User> findByIds(List<Long> ids) {
+        return userDao.selectByIds(ids);
     }
 }

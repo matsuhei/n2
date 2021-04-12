@@ -1,6 +1,6 @@
 package main.service;
 
-import main.doma.UserDao;
+import main.doma.dao.UserDao;
 import main.doma.entity.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -20,19 +22,8 @@ public class UserServiceTest {
     UserDao userDao;
 
     @Test
-    public void insert() {
-        long i;
-        for (i = 1; i < 10000; i++) {
-            userDao.insert(
-                User.builder()
-                    .id(i)
-                    .name("test" + i)
-                    .parama("A" + i)
-                    .paramb("B" + i)
-                    .build()
-            );
-        }
-
+    public void indexTest() {
+        init();
         userDao.selectAll();
 
         // インデックスを貼ってない かつ 引き出すケースが無いものは基本使わない
@@ -63,7 +54,47 @@ public class UserServiceTest {
     }
 
     @Test
-    public void test() {
-        userService.getUserById(1L);
+    public void selectIds() {
+        init();
+
+        List<Long> ids = new ArrayList<>();
+        for (long i = 3; i < 10000; i = i + 3) {
+            ids.add(i);
+        }
+
+        userDao.selectAll();
+
+        // select 単体ずつ
+        Long timeByIdStart = new Timestamp(System.currentTimeMillis()).getTime();
+        List<User> userListId = new ArrayList<>();
+        ids.forEach(id -> {
+            userListId.add(userDao.selectById(id));
+        });
+        Long timeByIdEnd = new Timestamp(System.currentTimeMillis()).getTime();
+        Long resultById = timeByIdEnd - timeByIdStart;
+        System.out.println("select複数 それぞれの取得(ms): " + resultById.toString());
+
+        // select 複数 In句
+        Long timeByIdsStart = new Timestamp(System.currentTimeMillis()).getTime();
+        List<User> userListIds = userDao.selectByIds(ids);
+        Long timeByIdsEnd = new Timestamp(System.currentTimeMillis()).getTime();
+        Long resultByIds = timeByIdsEnd - timeByIdsStart;
+        System.out.println("select複数 In句の取得(ms): " + resultByIds.toString());
+
+    }
+
+    private void init() {
+        List<User> list = new ArrayList<>();
+        for (long i = 1; i < 10000; i++) {
+            list.add(
+                User.builder()
+                    .id(i)
+                    .name("test" + i)
+                    .parama("A" + i)
+                    .paramb("B" + i)
+                    .build()
+            );
+        }
+        userDao.bulkInsert(list);
     }
 }

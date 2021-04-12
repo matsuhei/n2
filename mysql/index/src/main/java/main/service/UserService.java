@@ -1,6 +1,6 @@
 package main.service;
 
-import main.doma.UserRepository;
+import main.doma.repository.UserRepository;
 import main.doma.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,5 +18,9 @@ public class UserService {
 
     public User getUserById(Long id){
         return userRepository.findById(id);
+    }
+
+    public List<User> getUserByIds(List<Long> ids){
+        return userRepository.findByIds(ids);
     }
 }
