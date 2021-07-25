@@ -49,10 +49,14 @@ func getUser(c echo.Context) error {
 	var user User
 
 	db := getDb()
+
 	// Select
 	db.Model(&User{}).First(&user, id)
 
 	c.Logger().Printf("name: %v", user.Name)
+
+	sql, _ := db.DB()
+	sql.Close()
 
 	return c.String(http.StatusOK, "id: "+id+", user: "+user.Name)
 }
@@ -63,6 +67,9 @@ func getUsers(c echo.Context) error {
 	db := getDb()
 	// Select
 	db.Model(&User{}).Find(&users)
+
+	sql, _ := db.DB()
+	sql.Close()
 
 	return c.JSON(http.StatusOK, UsersResponse{List: users})
 }
@@ -81,6 +88,9 @@ func saveUser(c echo.Context) error {
 	db := getDb()
 	// Create
 	db.Model(&User{}).Create(&user)
+
+	sql, _ := db.DB()
+	sql.Close()
 
 	return c.String(http.StatusCreated, "name:"+u.Name+", age:"+string(u.Age))
 }
@@ -101,7 +111,10 @@ func putUser(c echo.Context) error {
 	// Updates
 	db.Model(&User{}).Where("id = ?", id).Updates(u)
 
-	return c.String(http.StatusOK, "name:"+u.Name+", age:"+string(u.Age))
+	sql, _ := db.DB()
+	sql.Close()
+
+	return c.String(http.StatusOK, "name:"+u.Name+", age:"+string(rune(u.Age)))
 }
 
 // e.DELETE("/users/:id", deleteUser)
@@ -112,6 +125,9 @@ func deleteUser(c echo.Context) error {
 	db := getDb()
 	// Delete
 	db.Delete(&User{}, id)
+
+	sql, _ := db.DB()
+	sql.Close()
 
 	return c.NoContent(http.StatusNoContent)
 }
