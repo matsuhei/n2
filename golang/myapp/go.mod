@@ -9,7 +9,7 @@ require (
 	github.com/jinzhu/gorm v1.9.16
 	github.com/labstack/echo/v4 v4.3.0
 	github.com/mailru/easyjson v0.7.7 // indirect
-	github.com/pkg/profile v1.2.1
+	github.com/pkg/profile v1.7.0
 	github.com/tsenart/go-tsz v0.0.0-20180814235614-0bd30b3df1c3 // indirect
 	github.com/tsenart/vegeta v12.7.0+incompatible // indirect
 	github.com/tsenart/vegeta/v12 v12.8.4
