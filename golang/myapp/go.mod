@@ -13,8 +13,6 @@ require (
 	github.com/tsenart/go-tsz v0.0.0-20180814235614-0bd30b3df1c3 // indirect
 	github.com/tsenart/vegeta v12.7.0+incompatible // indirect
 	github.com/tsenart/vegeta/v12 v12.8.4
-	golang.org/x/crypto v0.0.0-20210616213533-5ff15b29337e // indirect
-	golang.org/x/net v0.0.0-20210716203947-853a461950ff // indirect
-	gorm.io/driver/postgres v1.1.0
-	gorm.io/gorm v1.21.11
+	gorm.io/driver/postgres v1.5.7
+	gorm.io/gorm v1.25.7-0.20240204074919-46816ad31dde
 )
