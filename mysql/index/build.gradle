@@ -30,7 +30,7 @@ dependencies {
     compile files('lib/ojdbc6.jar')
     //　Domaのインストール
     implementation 'org.seasar.doma.boot:doma-spring-boot-starter:1.4.0'
-    annotationProcessor 'org.seasar.doma:doma-processor:2.35.0'
+    annotationProcessor 'org.seasar.doma:doma-processor:2.57.0'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
